@@ -87,6 +87,7 @@ a:hover {
     width: 70%;
     float: left;
     min-height: 80vh;
+    margin-left: 20px
 }
 
 #sidebar {
@@ -118,4 +119,56 @@ a:hover {
     #sidebar {
         margin-top: 1rem;
     }
+}
+
+form {
+    max-width: 80%;
+}
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.form-row label {
+    min-width: 120px;
+    font-weight: 500;
+    color: #343a40;
+    margin-bottom: 0;
+}
+
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 1rem;
+    background: #fafbfc;
+    margin-bottom: 0;
+}
+
+.field-errors {
+    color: #d32f2f;
+    font-size: 0.95rem;
+    margin-left: 8px;
+}
+
+form input[type="submit"], button[type="submit"] {
+    background: #2a7ae2;
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+    margin-left: 120px; /* aligns with label width in flex row */
+}
+
+form input[type="submit"]:hover, button[type="submit"]:hover {
+    background: #1857a4;
 }
