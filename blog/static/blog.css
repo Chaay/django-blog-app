@@ -172,3 +172,74 @@ form input[type="submit"], button[type="submit"] {
 form input[type="submit"]:hover, button[type="submit"]:hover {
     background: #1857a4;
 }
+
+a.share-link {
+    display: inline-block;
+    background: #2a7ae2;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    margin-bottom: 18px;
+}
+
+a.share-link:hover {
+    background: #1857a4;
+    color: #fff;
+}
+
+.date {
+    color: #868e96;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+/* Comments section container */
+.comments-box {
+    background: #fff;
+    padding: 24px 18px;
+}
+
+/* Comments section title */
+.comments-box h2 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 18px;
+    font-weight: 500;
+}
+
+/* Individual comment */
+.comment {
+    background: #ededed;
+    border-radius: 2px;
+    margin-bottom: 18px;
+    padding: 16px 20px;
+}
+
+.comment .info {
+    font-size: 1rem;
+    color: #7c7c7c;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.comment p {
+    font-size: 1.25rem;
+    color: #222;
+    margin: 0 0 8px 0;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Message for no comments */
+.no-comments {
+    color: #888;
+    font-style: italic;
+    margin-top: 12px;
+}
+
