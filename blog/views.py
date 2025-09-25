@@ -4,6 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
+from taggit.models import Tag
 
 # Create your views here.
 class PostListView(ListView):
@@ -11,6 +12,32 @@ class PostListView(ListView):
     context_object_name = 'posts'
     paginate_by = 3
     template_name = 'blog/post/list.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        
+        # Check for tag_slug from URL path parameter
+        tag_slug = self.kwargs.get('tag_slug')
+        
+        # If no URL parameter, check query parameter (backward compatibility)
+        if not tag_slug:
+            tag_slug = self.request.GET.get('tag')
+        
+        if tag_slug:
+            queryset = queryset.filter(tags__slug=tag_slug)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Get tag_slug from URL or query parameter
+        tag_slug = self.kwargs.get('tag_slug') or self.request.GET.get('tag')
+        
+        if tag_slug:
+            tag = get_object_or_404(Tag, slug=tag_slug)
+            context['tag'] = tag
+        
+        return context
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post, slug=post,
