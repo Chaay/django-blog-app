@@ -6,6 +6,8 @@ from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 from taggit.models import Tag
 from django.db.models import Count
+from .documents import PostDocument
+from elasticsearch_dsl import Q as ES_Q
 
 # Create your views here.
 class PostListView(ListView):
@@ -101,3 +103,32 @@ def post_share(request, post_id):
     return render(request, 'blog/post/share.html', {'post': post,
                                                         'form': form,
                                                         'sent': sent})
+
+def post_search(request):
+    query = request.GET.get('q', '').strip()
+
+    if query:
+        # Create search with query
+        search = PostDocument.search().query(
+            ES_Q('multi_match', 
+                 query=query,
+                 fields=['title^3', 'body^1', 'author^2', 'tags^2'],
+                 fuzziness='AUTO'
+            )
+        ).filter('term', status='published')
+        
+        total = search.count()
+        posts = search[:20]
+        
+        return render(request, 'blog/post/search.html', {
+            'query': query,
+            'posts': posts,
+            'total': total
+        })
+    
+    # No query - show empty search page
+    return render(request, 'blog/post/search.html', {
+        'query': '',
+        'posts': [],
+        'total': 0
+    })

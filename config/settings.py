@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'taggit',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -87,6 +88,12 @@ DATABASES = {
     }
 }
 
+# Elasticsearch configuration
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'http://localhost:9200'
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

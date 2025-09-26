@@ -1,0 +1,65 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+
+{% block title %}
+    {% if query %}Search results for "{{ query }}"{% else %}Search Posts{% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>Search Blog Posts</h1>
+    
+    <!-- Search Form -->
+    <form method="get" style="margin-bottom: 2rem;">
+        <input type="text" 
+               name="q" 
+               value="{{ query }}" 
+               placeholder="Search posts, authors, tags..." 
+               style="width: 300px; padding: 8px;"
+               required>
+        <input type="submit" value="Search" style="padding: 8px 15px;">
+    </form>
+    
+    {% if query %}
+        <h2>
+            {{ total }} result{{ total|pluralize }} for "{{ query }}"
+        </h2>
+        
+        {% if posts %}
+            {% for post in posts %}
+                <article style="margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+                    <h3>
+                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    </h3>
+                    <p class="date" style="color: #666; font-size: 0.9em;">
+                        Published {{ post.publish }} by {{ post.author }}
+                    </p>
+                    
+                    <!-- Show matched tags using Elasticsearch data -->
+                    {% if post.tags %}
+                        <p class="tags" style="margin: 0.5rem 0;">
+                            Tags: 
+                            {% for tag_name in post.tags %}
+                                <span style="background: #f0f0f0; padding: 2px 6px; border-radius: 3px;">
+                                    {{ tag_name }}
+                                </span>
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    {% endif %}
+                    
+                    
+                    <!-- Post excerpt -->
+                    <p>{{ post.body|markdown|truncatewords_html:30 }}</p>
+                </article>
+            {% endfor %}
+        {% else %}
+            <p>No posts found matching your search.</p>
+            <p>Try:</p>
+            <ul>
+                <li>Different keywords</li>
+                <li>Broader search terms</li>
+                <li>Check spelling</li>
+            </ul>
+        {% endif %}
+    {% endif %}
+{% endblock %}

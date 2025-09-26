@@ -40,6 +40,14 @@ class Post(models.Model):
                 self.publish.strftime('%m'),
                 self.publish.strftime('%d'),
                 self.slug])
+
+    def tags_indexing(self):
+        """
+        Used by Elasticsearch to index tags as a list of tag names.
+        This method is called by the PostDocument.
+        """
+        return [tag.name for tag in self.tags.all()]
+
     class Meta:
         ordering = ('-publish',)
     def __str__(self):
