@@ -28,7 +28,7 @@ A feature-rich blog application built with Django, featuring full-text search ca
 ## 🛠 Tech Stack
 
 - **Backend**: Django 4.2
-- **Database**: SQLite (development) / PostgreSQL (production ready)
+- **Database**: SQLite
 - **Search Engine**: Elasticsearch 8.x with django-elasticsearch-dsl
 - **Tagging**: django-taggit for flexible tagging system
 - **Content Formatting**: Markdown with custom template filters
@@ -61,19 +61,11 @@ pip install -r requirements.txt
 Create a `.env` file in the project root:
 
 ```env
-DEBUG=True
-SECRET_KEY=your-secret-key-here
-DATABASE_URL=sqlite:///db.sqlite3
 
 # Email Configuration (for sharing feature)
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
+
 EMAIL_HOST_USER=your-email@gmail.com
 EMAIL_HOST_PASSWORD=your-app-password
-EMAIL_USE_TLS=True
-
-# Elasticsearch Configuration
-ELASTICSEARCH_HOST=http://localhost:9200
 ```
 ### 3. Database Setup
 ```bash
@@ -82,9 +74,6 @@ python manage.py migrate
 
 # Create superuser
 python manage.py createsuperuser
-
-# Load sample data (optional)
-python manage.py loaddata sample_data.json
 ```
 ### 4. Elasticsearch Setup
 ```bash
@@ -135,17 +124,7 @@ python manage.py runserver
 
 The blog uses Django's `app_name = 'blog'` for URL namespacing:
 
-```python
-# In blog/urls.py
-app_name = 'blog'
-urlpatterns = [
-    path('', views.PostListView.as_view(), name='post_list'),
-    path('tag/<slug:tag_slug>/', views.PostListView.as_view(), name='post_list_by_tag'),
-    path('search/', views.post_search, name='post_search'),
-    path('<int:year>/<int:month>/<int:day>/<slug:post>/', views.post_detail, name='post_detail'),
-    path('<int:post_id>/share/', views.post_share, name='post_share'),
-]
-```
+
 ## 📁 Project Structure
 
 ```markdown
