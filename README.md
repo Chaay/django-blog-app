@@ -150,4 +150,37 @@ urlpatterns = [
 
 ```markdown
 ## 📁 Project Structure
-django-blog/ ├── config/ # Project configuration │ ├── init.py │ ├── settings.py # Django settings & Elasticsearch config │ ├── urls.py # Main URL configuration │ ├── wsgi.py # WSGI configuration for deployment │ └── asgi.py # ASGI configuration (async support) │ ├── blog/ # Main blog application │ ├── init.py │ ├── admin.py # Admin interface customization │ ├── apps.py # App configuration │ ├── models.py # Post & Comment models │ ├── views.py # View controllers & search logic │ ├── urls.py # Blog URL patterns │ ├── forms.py # Comment & email sharing forms │ ├── documents.py # Elasticsearch document mappings │ ├── sitemaps.py # XML sitemap generator │ ├── feeds.py # RSS feed functionality │ │ │ ├── migrations/ # Database migrations │ │ ├── init.py │ │ ├── 0001_initial.py │ │ └── ... │ │ │ ├── templatetags/ # Custom template tags & filters │ │ ├── init.py │ │ └── blog_tags.py # Markdown filter, post statistics │ │ │ └── templates/blog/ # HTML templates │ ├── base.html # Base template with navigation │ ├── pagination.html # Pagination component │ └── post/ │ ├── list.html # Post listing with tags │ ├── detail.html # Post detail with comments │ ├── search.html # Search interface & results │ ├── share.html # Email sharing form │ └── latest_posts.html # Latest posts sidebar │ ├── static/ # Static files (CSS, JS, images) │ ├── css/ │ ├── js/ │ └── images/ │ ├── media/ # User uploaded files │ └── uploads/ │ ├── requirements.txt # Python dependencies ├── manage.py # Django management commands ├── .env # Environment variables (not in git) ├── .gitignore # Git ignore rules ├── db.sqlite3 # SQLite database (development) └── README.md # Project documentation
+
+```text
+django-blog/
+├── config/                  # Project configuration
+│   ├── settings.py          # Django settings
+│   ├── urls.py              # Main URL configuration
+│   └── wsgi.py              # WSGI configuration
+│
+├── blog/                    # Main blog app
+│   ├── models.py            # Post, Comment models
+│   ├── views.py             # View logic & search
+│   ├── urls.py              # Blog URL patterns
+│   ├── admin.py             # Admin customization
+│   ├── forms.py             # Comment & sharing forms
+│   ├── documents.py         # Elasticsearch mappings
+│   ├── sitemaps.py          # XML sitemap generator
+│   │
+│   ├── templatetags/        # Custom template tags
+│   │   ├── __init__.py
+│   │   └── blog_tags.py     # Markdown filter, stats
+│   │
+│   └── templates/blog/      # HTML templates
+│       ├── base.html        # Base template
+│       ├── pagination.html  # Pagination component
+│       └── post/
+│           ├── list.html    # Post listing
+│           ├── detail.html  # Post detail & comments
+│           ├── search.html  # Search interface
+│           └── share.html   # Email sharing form
+│
+├── requirements.txt         # Python dependencies
+├── manage.py                # Django management
+└── README.md                # Documentation
+```
